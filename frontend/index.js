@@ -1,4 +1,6 @@
 
+const BASE_URL = "http://127.0.0.1:3000"
+const dogService = new DogService(BASE_URL)
 
 // document.addEventListener("DOMContentLoaded", () => {
 //     createNeighborhood()
@@ -6,7 +8,7 @@
 //     addDog()
 // })
 
-// const BASE_URL = "http://127.0.0.1:3000" 
+ 
 
 
 // function changeDisplay(){
