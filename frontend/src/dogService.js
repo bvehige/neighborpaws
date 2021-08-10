@@ -7,7 +7,12 @@ class DogService{
     getDogs(){
         fetch(`${this.endpoint}/dogs`)
         .then(resp => resp.json())
-        .then(dogs => {debugger})
+        .then(dogs => {
+            for (const dog of dogs){
+                let d = new Dog(dog)
+                d.putOnDom()
+            }
+        })
 
     }
 

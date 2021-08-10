@@ -24,10 +24,10 @@
 
 class Dog {
     //remember objects
-    static all = []
-    static dogContainer = document.getElementById('dogs-container')
+    // static all = []
+    // static dogContainer = document.getElementById('dogs-container')
 
-    constructor(id, name, breed, owner, address, comment, neighborhood_id){
+    constructor({id, name, breed, owner, address, comment, neighborhood_id}){
         this.id = id;
         this.name = name;
         this.breed = breed;
@@ -36,11 +36,11 @@ class Dog {
         this.comment = comment;
         this.neighborhood_id = neighborhood_id;
         
-        this.element = document.createElement('li')
-        this.element.dataset.id = this.id
-        this.element.id = `dog-${this.id}`
+        // this.element = document.createElement('li')
+        // this.element.dataset.id = this.id
+        // this.element.id = `dog-${this.id}`
 
-        Dog.all.push(this)
+        // Dog.all.push(this)
     }
 
     dogHTML(){
