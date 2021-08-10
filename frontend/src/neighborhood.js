@@ -1,63 +1,63 @@
 // read - fetch neighborhood index
-// function fetchNeighborhoods(){
-//     fetch(`${BASE_URL}/neighborhoods`)
-//     .then(resp => resp.json())
-//     .then(neighborhoods => {
-//         for (const neighborhood of neighborhoods){
-//             let n =  new Neighborhood(neighborhood.id, neighborhood.name, neighborhood.city, neighborhood.zipcode)
-//             n.renderNeighborhood();
-//         }
+function fetchNeighborhoods(){
+    fetch(`${BASE_URL}/neighborhoods`)
+    .then(resp => resp.json())
+    .then(neighborhoods => {
+        for (const neighborhood of neighborhoods){
+            let n =  new Neighborhood(neighborhood.id, neighborhood.name, neighborhood.city, neighborhood.zipcode)
+            n.renderNeighborhood();
+        }
 
-//     })
-// }
+    })
+}
 // create - create a new neighborhood
-// function createNeighborhood(){
-//     let neighborhoodForm = document.getElementById("neighborhood-form")
+function createNeighborhood(){
+    let neighborhoodForm = document.getElementById("neighborhood-form")
 
-//     neighborhoodForm.innerHTML += 
-//     `
-//     <b>Create a new Neighborhood</b><br>
-//     <form>
-//         <label for="name">Name: </label>
-//         <input type="text" id="name" value=""><br>
-//         <label for="city">City: </label>
-//         <input type="text" id="city" value=""><br>
-//         <label for="zipcode">Zip Code: </label>
-//         <input type="text" id="zipcode" value=""><br>
-//         <input type="submit" value ="Create Neighborhood">
-//     </form>
-//     `
-//     neighborhoodForm.addEventListener("submit", neighborhoodFormSubmission)
+    neighborhoodForm.innerHTML += 
+    `
+    <b>Create a new Neighborhood</b><br>
+    <form>
+        <label for="name">Name: </label>
+        <input type="text" id="name" value=""><br>
+        <label for="city">City: </label>
+        <input type="text" id="city" value=""><br>
+        <label for="zipcode">Zip Code: </label>
+        <input type="text" id="zipcode" value=""><br>
+        <input type="submit" value ="Create Neighborhood">
+    </form>
+    `
+    neighborhoodForm.addEventListener("submit", neighborhoodFormSubmission)
 
 
-// } 
+} 
 
-// function neighborhoodFormSubmission(){
-//         event.preventDefault();
-//         let name = document.getElementById("name").value
-//         let city = document.getElementById("city").value
-//         let zipcode = document.getElementById("zipcode").value
+function neighborhoodFormSubmission(){
+        event.preventDefault();
+        let name = document.getElementById("name").value
+        let city = document.getElementById("city").value
+        let zipcode = document.getElementById("zipcode").value
      
-//         let neighborhood = {
-//             name: name,
-//             city: city,
-//             zipcode: zipcode,
-//         }
+        let neighborhood = {
+            name: name,
+            city: city,
+            zipcode: zipcode,
+        }
 
-//         fetch(`${BASE_URL}/neighborhoods`, {
-//             method: "POST",
-//             headers: {
-//                 'Accept': 'application/json',
-//                 'Content-Type': 'application/json'
-//             },
-//               body: JSON.stringify(neighborhood)
-//         })
-//         .then(resp => resp.json())
-//         .then(neighborhood => {
-//             let n = new Neighborhood(neighborhood.id, neighborhood.name, neighborhood.city, neighborhood.zipcode)
-//             n.renderNeighborhood();
-//         })
-//     }
+        fetch(`${BASE_URL}/neighborhoods`, {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+              body: JSON.stringify(neighborhood)
+        })
+        .then(resp => resp.json())
+        .then(neighborhood => {
+            let n = new Neighborhood(neighborhood.id, neighborhood.name, neighborhood.city, neighborhood.zipcode)
+            n.renderNeighborhood();
+        })
+    }
 
 
 class Neighborhood {

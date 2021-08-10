@@ -1,30 +1,43 @@
 
 
 const BASE_URL = "http://127.0.0.1:3000"
-const dogService = new DogService(BASE_URL)
+// const dogService = new DogService(BASE_URL)
 
 fetchNeighborhoods()
+createNeighborhood()
 
-    function fetchNeighborhoods(){
-        fetch(`${BASE_URL}/neighborhoods`)
-        .then(resp => resp.json())
-        .then(neighborhoods => {
-            for (const neighborhood of neighborhoods){
-                let n = new Neighborhood(neighborhood.id, neighborhood.name, neighborhood.city, neighborhood.zipcode)
-                n.renderNeighborhood()
-            }
-        })
-    }
+//     function fetchNeighborhoods(){
+//         fetch(`${BASE_URL}/neighborhoods`)
+//         .then(resp => resp.json())
+//         .then(neighborhoods => {
+//             for (const neighborhood of neighborhoods){
+//                 let n = new Neighborhood(neighborhood.id, neighborhood.name, neighborhood.city, neighborhood.zipcode)
+//                 n.renderNeighborhood()
+//             }
+//         })
+//     }
 
 
-// function fetchNeighborhoods(){
-//     fetch(`${BASE_URL}/neighborhoods`)
-//     .then(resp => resp.json())
-//     .then(neighborhoods => {
-//         for (const neighborhood of neighborhoods){
-//             let n =  new Neighborhood(neighborhood.id, neighborhood.name, neighborhood.city, neighborhood.zipcode)
-//             n.renderNeighborhood();
-//         }
+// function createNeighborhood(){
+//     let neighborhoodForm = document.getElementById("neighborhood-form")
+
+//     neighborhoodForm.innerHTML += 
+//     `
+//     <b>Create a new Neighborhood</b><br>
+//     <form>
+//         <label for="name">Name: </label>
+//         <input type="text" id="name" value=""><br>
+//         <label for="city">City: </label>
+//         <input type="text" id="city" value=""><br>
+//         <label for="zipcode">Zip Code: </label>
+//         <input type="text" id="zipcode" value=""><br>
+//         <input type="submit" value ="Create Neighborhood">
+//     </form>
+//     `
+//     neighborhoodForm.addEventListener("submit", neighborhoodFormSubmission)
+
+
+// } 
 
 // dogService.getDogs()
 
