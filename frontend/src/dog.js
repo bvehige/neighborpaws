@@ -22,15 +22,46 @@
 
 
 
-// class Dog {
-//     constructor(id, name, breed, owner, address, comment){
-//         this.id = id;
-//         this.name = name;
-//         this.breed = breed;
-//         this.owner = owner;
-//         this.address = address;
-//         this.comment = comment;
-//     }
+class Dog {
+    //remember objects
+    static all = []
+    static dogContainer = document.getElementById('dogs-container')
+
+    constructor(id, name, breed, owner, address, comment, neighborhood_id){
+        this.id = id;
+        this.name = name;
+        this.breed = breed;
+        this.owner = owner;
+        this.address = address;
+        this.comment = comment;
+        this.neighborhood_id = neighborhood_id;
+        
+        this.element = document.createElement('li')
+        this.element.dataset.id = this.id
+        this.element.id = `dog-${this.id}`
+
+        Dog.all.push(this)
+    }
+
+    dogHTML(){
+        this.element.innerHTML += `
+        <div>
+            <h3>${this.name}</h3>
+            <li>
+            ${this.breed}
+            ${this.owner}
+            ${this.address}
+            ${this.comment}
+            </li>
+        </div>
+        `
+        return this.element
+    }
+
+    putOnDom(){
+        Dog.dogContainer.appendChild(this.dogHTML())
+    }
+}
 
 //     //render dog instance method
 //     renderDog() {
