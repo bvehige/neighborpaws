@@ -1,24 +1,41 @@
-document.addEventListener("DOMContentLoaded", () => {
-    fetchNeighborhoods()
-})
-
-const BASE_URL = "http://127.0.0.1:3000" 
-
-// read - fetch neighborhood index
-function fetchNeighborhoods(){
-    fetch(`${BASE_URL}/neighborhoods`)
-    .then(resp => resp.json())
-    .then(neighborhoods => {
-        for (const neighborhood of neighborhoods){
-            let n =  new Neighborhood(neighborhood.id, neighborhood.name, neighborhood.city, neighborhood.zipcode)
-            n.renderNeighborhood();
-        }
-
-    })
-}
 
 
-// create - create a new neighborhood
+// document.addEventListener("DOMContentLoaded", () => {
+//     createNeighborhood()
+//     fetchNeighborhoods()
+//     addDog()
+// })
+
+// const BASE_URL = "http://127.0.0.1:3000" 
+
+
+// function changeDisplay(){
+//     let div1 = document.getElementById("neighborhood-form")
+//     let div2 = document.getElementById("neighborhood-container")
+//     div1.remove()
+//     div2.remove()
+
+// }
+
+
+
+
+//     function viewButton(){
+//         let views = document.getElementById("view")
+//         console.log(views)
+//         views.addEventListener("click", changeDisplay)
+        // test.innerHTML +=
+        // `<button type="button">test button</button>`
+    
+    // }
+
 
 // delete - delete a neighborhood
+// let buttons = document.querySelectorAll(".delete-btn")
+// console.log(buttons)
+// for (const button of buttons){
+//     button.addEventListener("click", () => {
+//         debugger;
+//     })
+// }
 
