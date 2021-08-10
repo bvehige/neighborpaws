@@ -2,6 +2,9 @@
 const BASE_URL = "http://127.0.0.1:3000"
 const dogService = new DogService(BASE_URL)
 
+dogService.getDogs()
+
+
 // document.addEventListener("DOMContentLoaded", () => {
 //     createNeighborhood()
 //     fetchNeighborhoods()
