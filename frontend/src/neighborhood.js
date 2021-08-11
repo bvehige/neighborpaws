@@ -114,7 +114,7 @@ function neighborhoodFormSubmission(){
             method: 'DELETE'
         })
         .then(resp => resp.json())
-        .then(data => alert("neighborhood deleted"))
+        .then(data => alert(data.message))
         // fetchNeighborhoods()
         
     }
