@@ -6,6 +6,16 @@ const BASE_URL = "http://127.0.0.1:3000"
 fetchNeighborhoods()
 createNeighborhood()
 
+
+
+// let buttons = document.getElementsByClassName(".view-neighborhood")
+// console.log(buttons)
+// for (const button of buttons){
+//     button.addEventListener("click", () => {
+//         debugger;
+//     })
+// }
+
 //     function fetchNeighborhoods(){
 //         fetch(`${BASE_URL}/neighborhoods`)
 //         .then(resp => resp.json())

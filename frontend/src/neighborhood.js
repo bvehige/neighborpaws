@@ -1,3 +1,6 @@
+const neighborhoodForm = document.getElementById("neighborhood-form")
+const neighborhoodDiv = document.getElementById("neighborhood-container")
+
 // read - fetch neighborhood index
 function fetchNeighborhoods(){
     fetch(`${BASE_URL}/neighborhoods`)
@@ -10,9 +13,21 @@ function fetchNeighborhoods(){
 
     })
 }
+
+
+
+function fetchNeighborhood(id){
+    fetch(`${BASE_URL}/neighborhoods/${id}`)
+    .then(resp => resp.json())
+    .then(neighborhood => {
+        let n =  new Neighborhood(neighborhood.id, neighborhood.name, neighborhood.city, neighborhood.zipcode)
+            n.renderNeighborhood();
+        }
+    )
+}
+
 // create - create a new neighborhood
 function createNeighborhood(){
-    let neighborhoodForm = document.getElementById("neighborhood-form")
 
     neighborhoodForm.innerHTML += 
     `
@@ -57,6 +72,34 @@ function neighborhoodFormSubmission(){
             let n = new Neighborhood(neighborhood.id, neighborhood.name, neighborhood.city, neighborhood.zipcode)
             n.renderNeighborhood();
         })
+        event.target.reset()
+    }
+
+
+
+    function viewNeighborhood(){
+    
+        const id = event.target.dataset.id
+
+        fetch(`${BASE_URL}/neighborhoods/${id}`)
+        .then(resp => resp.json())
+        .then(neighborhood => {
+            neighborhoodForm.innerHTML = ''
+            neighborhoodDiv.innerHTML = ''
+            neighborhoodDiv.innerHTML += `
+            <h3>${neighborhood.name} Neighborhood</h3> - ${neighborhood.city}, ${neighborhood.zipcode}
+            <br><br>
+            <a id="back-button" href="#">Back to All Neighborhoods</a>
+            `
+            const backButton = document.getElementById("back-button")
+            backButton.addEventListener('click', goBack)
+        })
+    }
+
+    function goBack(){
+        neighborhoodDiv.innerHTML = ''
+        createNeighborhood()
+        fetchNeighborhoods()
     }
 
 
@@ -70,20 +113,27 @@ class Neighborhood {
 
 // //render neighborhood instance method
     renderNeighborhood() {
-        let neighborhoodDiv = document.getElementById("neighborhood-container")
         neighborhoodDiv.innerHTML +=
         `
         <ul>
         <li> <h3>${this.name} Neighborhood</h3> - ${this.city}, ${this.zipcode}
         </li>
         </ul>
-        <button data-id="${this.id}" class="add-dog-btn">Add A Dog</button>
+        <button data-id="${this.id}" onclick="viewNeighborhood()" class="view-neighborhood">View Neighborhood</button>
         `
+        // const buttons = document.getElementsByName("button")
+        // for (const button of buttons){
+        //     button.addEventListener('click', neighborhoodShow)
+        // }
     }
 
-    // showNeighborhood() {
-    //     event.preventDefault();
-    //     console.log("show neighborhood")
-    // }
+   
 
+    // <button data-id="${this.id}" class="add-dog-btn">Add A Dog</button>
+
+    // viewNeighborhood() {
+    //     // event.preventDefault();
+    //     debugger
+    //     console.log("view neighborhood")
+    // }
 }
