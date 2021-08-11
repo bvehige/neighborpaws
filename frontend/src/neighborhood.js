@@ -102,6 +102,22 @@ function neighborhoodFormSubmission(){
         fetchNeighborhoods()
     }
 
+    function deleteButton(){
+        if (event.target.id === "delete button")
+            deleteNeighborhood(event.target)
+    }
+
+    function deleteNeighborhood(element){
+        element.parentElement.remove()
+        const id = event.target.dataset.id
+        fetch(`${BASE_URL}/neighborhoods/${id}`, {
+            method: 'DELETE'
+        })
+        .then(resp => resp.json())
+        .then(data => alert("neighborhood deleted"))
+        // fetchNeighborhoods()
+        
+    }
 
 class Neighborhood {
     constructor(id, name, city, zipcode){
@@ -115,16 +131,21 @@ class Neighborhood {
     renderNeighborhood() {
         neighborhoodDiv.innerHTML +=
         `
-        <ul>
+        <div data-id=${this.id}>
         <li> <h3>${this.name} Neighborhood</h3> - ${this.city}, ${this.zipcode}
         </li>
-        </ul>
         <button data-id="${this.id}" onclick="viewNeighborhood()" class="view-neighborhood">View Neighborhood</button>
+        <button id = "delete button" data-id="${this.id}"> Delete Neighborhood</button>
+        </div>
         `
         // const buttons = document.getElementsByName("button")
         // for (const button of buttons){
         //     button.addEventListener('click', neighborhoodShow)
         // }
+        const bttns = document.querySelectorAll('button')
+        for (const bttn of bttns){
+            bttn.addEventListener('click', deleteButton)
+        }
     }
 
    

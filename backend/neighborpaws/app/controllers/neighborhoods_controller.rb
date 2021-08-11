@@ -36,6 +36,7 @@ class NeighborhoodsController < ApplicationController
   # DELETE /neighborhoods/1
   def destroy
     @neighborhood.destroy
+    render json: {message: "#{neighborhood.name} was deleted."}
   end
 
   private
