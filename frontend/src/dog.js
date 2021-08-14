@@ -52,7 +52,7 @@ function dogFormSubmission(){
             body: JSON.stringify(dog)
     })
     .then(resp => resp.json())
-    .then(dog => {debugger
+    .then(dog => {
         let d = new Dog(dog.id, dog.name, dog.breed, dog.owner, dog.address, dog.comment, dog.neighborhood_id)
         d.renderDog()
     })
@@ -110,7 +110,23 @@ function dogFormSubmission(){
 // }
 
 
+function dogDeleteButton(){
+    debugger
+    if (event.target.id === "delete button")
+        deleteDog(event.target)
+}
 
+function deleteDog(element){
+    debugger
+    element.parentElement.remove()
+        const id = event.target.dataset.id
+        fetch(`${BASE_URL}/dogs/${id}`, {
+            method: 'DELETE'
+        })
+        .then(resp => resp.json())
+        .then(data => alert(data.message))
+
+}
 
 class Dog {
     //remember objects
@@ -161,28 +177,14 @@ class Dog {
         Breed: ${this.breed} <br>
         Owner: ${this.owner} <br>
         Address: ${this.address} <br>
-        Special Comments: ${this.comment}
+        Special Comments: ${this.comment}<br><br><br>
+        <button id = "delete button" data-id="${this.id}">Remove Dog From The Neighborhood</button>
         </div>
         `
+        const btns = document.querySelectorAll('button')
+        for (const btn of btns){
+        btn.addEventListener('click', dogDeleteButton)
+        }
     }
 
 }
-
-// renderNeighborhood() {
-//     neighborhoodDiv.innerHTML +=
-//     `
-//     <div data-id=${this.id} class=neighborhood-card>
-//     <h3>${this.name} Neighborhood</h3> - ${this.city}, ${this.zipcode}
-//     <button data-id="${this.id}" onclick="viewNeighborhood()" class="view-neighborhood">View Neighborhood</button>
-//     <button id = "delete button" data-id="${this.id}"> Delete Neighborhood</button>
-//     </div>
-//     `
-//     // const buttons = document.getElementsByName("button")
-//     // for (const button of buttons){
-//     //     button.addEventListener('click', neighborhoodShow)
-//     // }
-//     const bttns = document.querySelectorAll('button')
-//     for (const bttn of bttns){
-//         bttn.addEventListener('click', deleteButton)
-//     }
-// }

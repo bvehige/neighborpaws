@@ -40,6 +40,7 @@ class DogsController < ApplicationController
   # DELETE /dogs/1
   def destroy
     @dog.destroy
+    render json: {message: "#{@dog.name} was removed from the neighborhood."}
   end
 
   private
