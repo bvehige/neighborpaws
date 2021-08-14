@@ -1,6 +1,7 @@
 const neighborhoodForm = document.getElementById("neighborhood-form")
 const neighborhoodDiv = document.getElementById("neighborhood-container")
 const h1 = document.getElementById("h1-neighborhoods")
+const btmLink = document.getElementById("bottom-link")
 
 // read - fetch neighborhood index
 function fetchNeighborhoods(){
@@ -89,8 +90,12 @@ function neighborhoodFormSubmission(){
             h1.style.display = "none"
             neighborhoodDiv.innerHTML = ''
             neighborhoodDiv.innerHTML += `
-            <h3>${neighborhood.name} Neighborhood</h3> - ${neighborhood.city}, ${neighborhood.zipcode}
-            <br><br>
+            <ul>
+            <h2>${neighborhood.name} Neighborhood</h2>
+            <h3>${neighborhood.city}, ${neighborhood.zipcode}</h3>
+            </ul>
+            `
+            btmLink.innerHTML = `
             <a id="back-button" href="#">Back to All Neighborhoods</a>
             `
             const backButton = document.getElementById("back-button")

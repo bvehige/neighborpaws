@@ -104,7 +104,12 @@ class Dog {
         DogDiv.innerHTML +=
         `
         <ul>
-        <li> ${this.name}, ${this.breed}, ${this.owner}, ${this.address}, ${this.comment}
+        <li> 
+        Name: <b>${this.name}</b> <br>
+        Breed: ${this.breed} <br>
+        Owner: ${this.owner} <br>
+        Address: ${this.address} <br>
+        Special Comments: ${this.comment}
         </li>
         </ul>
         `

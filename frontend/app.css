@@ -42,6 +42,13 @@
     flex-wrap: wrap;
   }
 
+  #bottom-link {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+  }
+
   #neighborhood-form {
     border: solid;
     border-color: #047a14;
