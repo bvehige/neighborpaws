@@ -1,13 +1,50 @@
-// function fetchDogs() {
-//     fetch("http://127.0.0.1:3000/dogs")
+
+
+
+function fetchDogs(){
+    fetch(`${BASE_URL}/dogs`)
+    .then(resp => resp.json())
+    .then(dogs => {
+        for (const dog of dogs){
+            let d = new Dog(dog.id, dog.name, dog.breed, dog.owner, dog.address, dog.comment)
+            d.renderDog();
+        }
+    })
+}   
+
+function fetchDogsByNeighborhood(id){
+    
+    fetch(`${BASE_URL}/neighborhoods/${id}/dogs`)
+        .then(resp => resp.json())
+        .then(dogs => {
+            for (const dog of dogs){
+                let d = new Dog(dog.id, dog.name, dog.breed, dog.owner, dog.address, dog.comment)
+            d.renderDog();
+            }
+            // neighborhoodForm.style.display = "none"
+            // h1.style.display = "none"
+            // neighborhoodDiv.innerHTML = ''
+            // neighborhoodDiv.innerHTML += `
+            // <h3>${neighborhood.name} Neighborhood</h3> - ${neighborhood.city}, ${neighborhood.zipcode}
+            // <br><br>
+            // <a id="back-button" href="#">Back to All Neighborhoods</a>
+            // `
+            // const backButton = document.getElementById("back-button")
+            // backButton.addEventListener('click', goBack)
+        })
+    }
+
+// function fetchNeighborhoods(){
+//     fetch(`${BASE_URL}/neighborhoods`)
 //     .then(resp => resp.json())
-//     .then(dogs => {
-//         for (const dog of dogs){
-//             let d = new Dog(dog.id, dog.name, dog.breed, dog.owner, dog.address, dog.comment)
-//             d.renderDog();
+//     .then(neighborhoods => {
+//         for (const neighborhood of neighborhoods){
+//             let n =  new Neighborhood(neighborhood.id, neighborhood.name, neighborhood.city, neighborhood.zipcode)
+//             n.renderNeighborhood();
 //         }
+
 //     })
-// }   
+// }
 
 // function addDog() {
 //     let addDogButton = document.getElementsByClassName("add-dog-btn")
@@ -27,7 +64,7 @@ class Dog {
     // static all = []
     // static dogContainer = document.getElementById('dogs-container')
 
-    constructor({id, name, breed, owner, address, comment, neighborhood_id}){
+    constructor(id, name, breed, owner, address, comment, neighborhood_id){
         this.id = id;
         this.name = name;
         this.breed = breed;
@@ -61,18 +98,35 @@ class Dog {
     putOnDom(){
         Dog.dogContainer.appendChild(this.dogHTML())
     }
+
+    //render dog instance method
+    renderDog() {
+        DogDiv.innerHTML +=
+        `
+        <ul>
+        <li> ${this.name}, ${this.breed}, ${this.owner}, ${this.address}, ${this.comment}
+        </li>
+        </ul>
+        `
+    }
+
 }
 
-//     //render dog instance method
-//     renderDog() {
-//         let DogDiv = document.getElementById("dogs-container")
-//         DogDiv.innerHTML +=
-//         `
-//         <ul>
-//         <li> ${this.name}, ${this.breed}, ${this.owner}, ${this.address}, ${this.comment}
-//         </li>
-//         </ul>
-//         `
-
+// renderNeighborhood() {
+//     neighborhoodDiv.innerHTML +=
+//     `
+//     <div data-id=${this.id} class=neighborhood-card>
+//     <h3>${this.name} Neighborhood</h3> - ${this.city}, ${this.zipcode}
+//     <button data-id="${this.id}" onclick="viewNeighborhood()" class="view-neighborhood">View Neighborhood</button>
+//     <button id = "delete button" data-id="${this.id}"> Delete Neighborhood</button>
+//     </div>
+//     `
+//     // const buttons = document.getElementsByName("button")
+//     // for (const button of buttons){
+//     //     button.addEventListener('click', neighborhoodShow)
+//     // }
+//     const bttns = document.querySelectorAll('button')
+//     for (const bttn of bttns){
+//         bttn.addEventListener('click', deleteButton)
 //     }
 // }

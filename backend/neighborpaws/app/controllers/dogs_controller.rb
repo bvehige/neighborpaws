@@ -3,7 +3,11 @@ class DogsController < ApplicationController
 
   # GET /dogs
   def index
-    @dogs = Dog.all
+    if params[:neighborhood_id] && @neighborhood = Neighborhood.find_by_id(params[:neighborhood_id])
+      @dogs = @neighborhood.dogs 
+    else
+      @dogs = []
+    end
 
     render json: @dogs
   end
@@ -46,6 +50,6 @@ class DogsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def dog_params
-      params.require(:dog).permit(:name, :breed, :owner, :address, :comment)
+      params.require(:dog).permit(:name, :breed, :owner, :address, :comment, :neighborhood_id)
     end
 end

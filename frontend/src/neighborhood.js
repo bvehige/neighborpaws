@@ -1,5 +1,6 @@
 const neighborhoodForm = document.getElementById("neighborhood-form")
 const neighborhoodDiv = document.getElementById("neighborhood-container")
+const h1 = document.getElementById("h1-neighborhoods")
 
 // read - fetch neighborhood index
 function fetchNeighborhoods(){
@@ -13,7 +14,6 @@ function fetchNeighborhoods(){
 
     })
 }
-
 
 
 function fetchNeighborhood(id){
@@ -78,13 +78,15 @@ function neighborhoodFormSubmission(){
 
 
     function viewNeighborhood(){
-    
+        
         const id = event.target.dataset.id
+        
 
         fetch(`${BASE_URL}/neighborhoods/${id}`)
         .then(resp => resp.json())
         .then(neighborhood => {
-            neighborhoodForm.innerHTML = ''
+            neighborhoodForm.style.display = "none"
+            h1.style.display = "none"
             neighborhoodDiv.innerHTML = ''
             neighborhoodDiv.innerHTML += `
             <h3>${neighborhood.name} Neighborhood</h3> - ${neighborhood.city}, ${neighborhood.zipcode}
@@ -93,11 +95,24 @@ function neighborhoodFormSubmission(){
             `
             const backButton = document.getElementById("back-button")
             backButton.addEventListener('click', goBack)
+            
         })
+        const DogDiv = document.getElementById("dogs-container")
+            fetchDogsByNeighborhood(id)
     }
 
+    // function fetchNeighborhoodDogs(){
+    //     fetch(`${BASE_URL}/neighborhoods/${id}/dogs`)
+    //     .then(resp => resp.json())
+    //     .then(dogs => Dog)
+    // }
+
     function goBack(){
+        neighborhoodForm.style.display = "block"
+        h1.style.display ="block"
+        neighborhoodForm.innerHTML = ''
         neighborhoodDiv.innerHTML = ''
+        DogDiv.innerHTML = ''
         createNeighborhood()
         fetchNeighborhoods()
     }
@@ -129,6 +144,7 @@ class Neighborhood {
 
 // //render neighborhood instance method
     renderNeighborhood() {
+        
         neighborhoodDiv.innerHTML +=
         `
         <div data-id=${this.id} class=neighborhood-card>
