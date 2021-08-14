@@ -21,18 +21,71 @@ function fetchDogsByNeighborhood(id){
                 let d = new Dog(dog.id, dog.name, dog.breed, dog.owner, dog.address, dog.comment)
             d.renderDog();
             }
-            // neighborhoodForm.style.display = "none"
-            // h1.style.display = "none"
-            // neighborhoodDiv.innerHTML = ''
-            // neighborhoodDiv.innerHTML += `
-            // <h3>${neighborhood.name} Neighborhood</h3> - ${neighborhood.city}, ${neighborhood.zipcode}
-            // <br><br>
-            // <a id="back-button" href="#">Back to All Neighborhoods</a>
-            // `
-            // const backButton = document.getElementById("back-button")
-            // backButton.addEventListener('click', goBack)
+            
         })
     }
+
+function dogFormSubmission(){
+    event.preventDefault();
+    let neighborhood_id = event.target.neighborhood.value
+    let name = event.target.name.value
+    let breed = event.target.breed.value
+    let owner = event.target.owner.value
+    let address = event.target.address.value
+    let comment = event.target.comment.value
+
+    let dog = {
+        name: name,
+        breed: breed,
+        owner: owner,
+        address: address,
+        comment: comment,
+        neighborhood_id: neighborhood_id
+    }
+
+    fetch(`${BASE_URL}/dogs`, {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+            body: JSON.stringify(dog)
+    })
+    .then(resp => resp.json())
+    .then(dog => {debugger
+        let d = new Dog(dog.id, dog.name, dog.breed, dog.owner, dog.address, dog.comment, dog.neighborhood_id)
+        d.renderDog()
+    })
+    event.target.reset
+}   
+
+// function neighborhoodFormSubmission(){
+//     event.preventDefault();
+//     let name = document.getElementById("name").value
+//     let city = document.getElementById("city").value
+//     let zipcode = document.getElementById("zipcode").value
+ 
+//     let neighborhood = {
+//         name: name,
+//         city: city,
+//         zipcode: zipcode,
+//     }
+
+//     fetch(`${BASE_URL}/neighborhoods`, {
+//         method: "POST",
+//         headers: {
+//             'Accept': 'application/json',
+//             'Content-Type': 'application/json'
+//         },
+//           body: JSON.stringify(neighborhood)
+//     })
+//     .then(resp => resp.json())
+//     .then(neighborhood => {
+//         let n = new Neighborhood(neighborhood.id, neighborhood.name, neighborhood.city, neighborhood.zipcode)
+//         n.renderNeighborhood();
+//     })
+//     event.target.reset()
+// }
 
 // function fetchNeighborhoods(){
 //     fetch(`${BASE_URL}/neighborhoods`)
@@ -103,15 +156,13 @@ class Dog {
     renderDog() {
         DogDiv.innerHTML +=
         `
-        <ul>
-        <li> 
+        <div data-id=${this.id} class=dog-card>
         Name: <b>${this.name}</b> <br>
         Breed: ${this.breed} <br>
         Owner: ${this.owner} <br>
         Address: ${this.address} <br>
         Special Comments: ${this.comment}
-        </li>
-        </ul>
+        </div>
         `
     }
 

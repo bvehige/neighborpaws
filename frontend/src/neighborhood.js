@@ -86,24 +86,46 @@ function neighborhoodFormSubmission(){
         fetch(`${BASE_URL}/neighborhoods/${id}`)
         .then(resp => resp.json())
         .then(neighborhood => {
+            dogForm.style.display ="block"
             neighborhoodForm.style.display = "none"
             h1.style.display = "none"
             neighborhoodDiv.innerHTML = ''
             neighborhoodDiv.innerHTML += `
-            <ul>
-            <h2>${neighborhood.name} Neighborhood</h2>
-            <h3>${neighborhood.city}, ${neighborhood.zipcode}</h3>
-            </ul>
+            <h2><b>${neighborhood.name} Neighborhood</b> - ${neighborhood.city}, ${neighborhood.zipcode}</h2>
             `
-            btmLink.innerHTML = `
-            <a id="back-button" href="#">Back to All Neighborhoods</a>
+            dogForm.innerHTML = `
+            <h2>Add A New ${neighborhood.name} Dog</h2>
+            <form>
+            <input type="hidden" id="neighborhood" value=${neighborhood.id}>
+            <label for="name">Dog's Name: </label>
+            <input type="text" id="name" value="">
+            <label for="breed">Dog's Breed: </label>
+            <input type="text" id="breed" value="">
+            <label for="owner">Dog's Owner: </label>
+            <input type="text" id="owner" value=""><br>
+            <label for="address">Dog's Address: </label>
+            <textarea id="address" rows="2" cols = "50">
+            </textarea><br>
+            <label for="comment">Special Comments: </label>
+            <textarea id="comment" rows="4" cols="50">
+            </textarea>
+            <br>
+            <input type="submit" value ="Add Dog To The Neighborhood">
+            </form>
             `
+            dogForm.addEventListener('submit', dogFormSubmission)
+
             const backButton = document.getElementById("back-button")
             backButton.addEventListener('click', goBack)
             
         })
         const DogDiv = document.getElementById("dogs-container")
             fetchDogsByNeighborhood(id)
+
+        btmLink.innerHTML = `
+        <a id="back-button" href="#">Back to All Neighborhoods</a>
+        `
+
     }
 
     // function fetchNeighborhoodDogs(){
@@ -118,6 +140,7 @@ function neighborhoodFormSubmission(){
         neighborhoodForm.innerHTML = ''
         neighborhoodDiv.innerHTML = ''
         DogDiv.innerHTML = ''
+        dogForm.style.display ="none"
         createNeighborhood()
         fetchNeighborhoods()
     }
