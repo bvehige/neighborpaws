@@ -108,13 +108,45 @@ function dogFormSubmission(){
 // function createDog(){
 //     console.log("create Dog")
 // }
+// function dogShow(){
+    
+//     const id = event.target.dataset.id
+    
+//     fetch(`${BASE_URL}/dogs/${id}`)
+//     .then(resp => resp.json())
+//     .then(dog => {
+//         DogDiv.innerHTML =''
+//         DogDiv.innerHTML += `
+//         Name: ${dog.name}
+//         Breed: ${dog.breed}
+//         Owner: ${dog.owner}
+//         Address: ${dog.address}
+//         Speical Comment: ${dog.comment}
+//         <a id="back-bttn" href="#">Back To Neighborhood Dogs</a>
+//         `
+        
+//         const backBttn = document.getElementById('back-bttn')
+//         backBttn.addEventListener('click', dogGoBack)
 
+//     })
+// }
+
+// function dogGoBack(){
+// debugger
+// }
 
 function dogDeleteButton(){
     debugger
     if (event.target.id === "delete button")
         deleteDog(event.target)
+    else (event.target.id === "edit button")
+        editDogForm(event.target)
+    
 }
+
+// function editDogForm(element){
+//     debugger
+// }
 
 function deleteDog(element){
     debugger
@@ -178,13 +210,19 @@ class Dog {
         Owner: ${this.owner} <br>
         Address: ${this.address} <br>
         Special Comments: ${this.comment}<br><br><br>
-        <button id = "delete button" data-id="${this.id}">Remove Dog From The Neighborhood</button>
+
+        <button id="delete button" data-id="${this.id}">Remove Dog From The Neighborhood</button>
         </div>
         `
         const btns = document.querySelectorAll('button')
         for (const btn of btns){
         btn.addEventListener('click', dogDeleteButton)
         }
+        // const dogDivs= document.getElementsByClassName('dog-card')    
+        // for (const div of dogDivs){
+        // div.addEventListener('click', dogShow)
+        // }
+        
     }
 
 }

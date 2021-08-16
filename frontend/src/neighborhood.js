@@ -32,14 +32,14 @@ function createNeighborhood(){
 
     neighborhoodForm.innerHTML += 
     `
-    <b>Create a new Neighborhood</b><br>
+    <b>Create a new Neighborhood</b><br><br>
     <form>
         <label for="name">Name: </label>
-        <input type="text" id="name" value=""><br>
+        <input type="text" id="name" value=""><span>
         <label for="city">City: </label>
-        <input type="text" id="city" value=""><br>
+        <input type="text" id="city" value=""><span>
         <label for="zipcode">Zip Code: </label>
-        <input type="text" id="zipcode" value=""><br>
+        <input type="text" id="zipcode" value=""><br><br>
         <input type="submit" value ="Create Neighborhood">
     </form>
     `
@@ -128,6 +128,7 @@ function neighborhoodFormSubmission(){
 
     }
 
+
     // function fetchNeighborhoodDogs(){
     //     fetch(`${BASE_URL}/neighborhoods/${id}/dogs`)
     //     .then(resp => resp.json())
@@ -172,7 +173,7 @@ class Neighborhood {
 
 // //render neighborhood instance method
     renderNeighborhood() {
-        
+        dogForm.style.display = "none"
         neighborhoodDiv.innerHTML +=
         `
         <div data-id=${this.id} class=neighborhood-card>
@@ -189,6 +190,7 @@ class Neighborhood {
         for (const bttn of bttns){
             bttn.addEventListener('click', deleteButton)
         }
+
     }
 
    
