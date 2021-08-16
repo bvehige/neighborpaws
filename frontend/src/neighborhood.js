@@ -91,6 +91,7 @@ function neighborhoodFormSubmission(){
         .then(resp => resp.json())
         .then(neighborhood => {
             dogForm.style.display ="block"
+            dogNeighborhoodh1.style.display = "block"
             neighborhoodForm.style.display = "none"
             h1.style.display = "none"
             neighborhoodDiv.innerHTML = ''
@@ -181,6 +182,7 @@ class Neighborhood {
 // //render neighborhood instance method
     renderNeighborhood() {
         dogForm.style.display = "none"
+        dogNeighborhoodh1.style.display = "none"
         neighborhoodDiv.innerHTML +=
         `
         <div data-id=${this.id} class=neighborhood-card>
