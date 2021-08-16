@@ -59,7 +59,7 @@ function dogFormSubmission(){
         let d = new Dog(dog.id, dog.name, dog.breed, dog.owner, dog.address, dog.comment, dog.img, dog.neighborhood_id)
         d.renderDog()
     })
-    event.target.reset
+    event.target.reset()
 }   
 
 // function neighborhoodFormSubmission(){

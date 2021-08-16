@@ -186,7 +186,7 @@ class Neighborhood {
         neighborhoodDiv.innerHTML +=
         `
         <div data-id=${this.id} class=neighborhood-card>
-        <h3>${this.name} Neighborhood</h3> - ${this.city}, ${this.state} ${this.zipcode}
+        <h3>${this.name} Neighborhood</h3> - ${this.city},  ${this.state} ${this.zipcode} <br><br>
         <button data-id="${this.id}" onclick="viewNeighborhood()" class="view-neighborhood">View Neighborhood</button><br><br>
         <button id = "delete button" data-id="${this.id}"> Delete Neighborhood</button>
         </div>
