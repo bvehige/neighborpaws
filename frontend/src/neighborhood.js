@@ -9,7 +9,7 @@ function fetchNeighborhoods(){
     .then(resp => resp.json())
     .then(neighborhoods => {
         for (const neighborhood of neighborhoods){
-            let n =  new Neighborhood(neighborhood.id, neighborhood.name, neighborhood.city, neighborhood.zipcode)
+            let n =  new Neighborhood(neighborhood.id, neighborhood.name, neighborhood.city, neighborhood.state, neighborhood.zipcode)
             n.renderNeighborhood();
         }
 
@@ -21,7 +21,7 @@ function fetchNeighborhood(id){
     fetch(`${BASE_URL}/neighborhoods/${id}`)
     .then(resp => resp.json())
     .then(neighborhood => {
-        let n =  new Neighborhood(neighborhood.id, neighborhood.name, neighborhood.city, neighborhood.zipcode)
+        let n =  new Neighborhood(neighborhood.id, neighborhood.name, neighborhood.city, neighborhood.state, neighborhood.zipcode)
             n.renderNeighborhood();
         }
     )
@@ -38,6 +38,8 @@ function createNeighborhood(){
         <input type="text" id="name" value=""><span>
         <label for="city">City: </label>
         <input type="text" id="city" value=""><span>
+        <label for="state">State: </label>
+        <input type="text" id="state" value=""><span>
         <label for="zipcode">Zip Code: </label>
         <input type="text" id="zipcode" value=""><br><br>
         <input type="submit" value ="Create Neighborhood">
@@ -52,11 +54,13 @@ function neighborhoodFormSubmission(){
         event.preventDefault();
         let name = document.getElementById("name").value
         let city = document.getElementById("city").value
+        let state = document.getElementById("state").value
         let zipcode = document.getElementById("zipcode").value
      
         let neighborhood = {
             name: name,
             city: city,
+            state: state,
             zipcode: zipcode,
         }
 
@@ -70,7 +74,7 @@ function neighborhoodFormSubmission(){
         })
         .then(resp => resp.json())
         .then(neighborhood => {
-            let n = new Neighborhood(neighborhood.id, neighborhood.name, neighborhood.city, neighborhood.zipcode)
+            let n = new Neighborhood(neighborhood.id, neighborhood.name, neighborhood.city, neighborhood.state, neighborhood.zipcode)
             n.renderNeighborhood();
         })
         event.target.reset()
@@ -91,7 +95,7 @@ function neighborhoodFormSubmission(){
             h1.style.display = "none"
             neighborhoodDiv.innerHTML = ''
             neighborhoodDiv.innerHTML += `
-            <h2><b>${neighborhood.name} Neighborhood</b> - ${neighborhood.city}, ${neighborhood.zipcode}</h2>
+            <h2><b>${neighborhood.name} Neighborhood</b> - ${neighborhood.city}, ${neighborhood.state} ${neighborhood.zipcode}</h2>
             `
             dogForm.innerHTML = `
             <h2>Add A New ${neighborhood.name} Dog</h2>
@@ -102,14 +106,16 @@ function neighborhoodFormSubmission(){
             <label for="breed">Dog's Breed: </label>
             <input type="text" id="breed" value="">
             <label for="owner">Dog's Owner: </label>
-            <input type="text" id="owner" value=""><br>
+            <input type="text" id="owner" value=""><br><br>
             <label for="address">Dog's Address: </label>
             <textarea id="address" rows="2" cols = "50">
-            </textarea><br>
+            </textarea><span>
             <label for="comment">Special Comments: </label>
-            <textarea id="comment" rows="4" cols="50">
-            </textarea>
-            <br>
+            <textarea id="comment" rows="2" cols="50">
+            </textarea><br><br>
+            <label for="img">Add An Image URL: </label>
+            <input type="text" id="image" value="">
+            <br><br>
             <input type="submit" value ="Add Dog To The Neighborhood">
             </form>
             `
@@ -164,10 +170,11 @@ function neighborhoodFormSubmission(){
     }
 
 class Neighborhood {
-    constructor(id, name, city, zipcode){
+    constructor(id, name, city, state, zipcode){
         this.id = id;
         this.name = name;
         this.city = city;
+        this.state = state;
         this.zipcode = zipcode;
     }
 
@@ -177,8 +184,8 @@ class Neighborhood {
         neighborhoodDiv.innerHTML +=
         `
         <div data-id=${this.id} class=neighborhood-card>
-        <h3>${this.name} Neighborhood</h3> - ${this.city}, ${this.zipcode}
-        <button data-id="${this.id}" onclick="viewNeighborhood()" class="view-neighborhood">View Neighborhood</button>
+        <h3>${this.name} Neighborhood</h3> - ${this.city}, ${this.state} ${this.zipcode}
+        <button data-id="${this.id}" onclick="viewNeighborhood()" class="view-neighborhood">View Neighborhood</button><br><br>
         <button id = "delete button" data-id="${this.id}"> Delete Neighborhood</button>
         </div>
         `

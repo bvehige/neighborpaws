@@ -47,6 +47,6 @@ class NeighborhoodsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def neighborhood_params
-      params.require(:neighborhood).permit(:name, :city, :zipcode)
+      params.require(:neighborhood).permit(:name, :city, :state, :zipcode)
     end
 end

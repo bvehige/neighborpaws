@@ -6,7 +6,7 @@ function fetchDogs(){
     .then(resp => resp.json())
     .then(dogs => {
         for (const dog of dogs){
-            let d = new Dog(dog.id, dog.name, dog.breed, dog.owner, dog.address, dog.comment)
+            let d = new Dog(dog.id, dog.name, dog.breed, dog.owner, dog.address, dog.comment, dog.img)
             d.renderDog();
         }
     })
@@ -18,7 +18,7 @@ function fetchDogsByNeighborhood(id){
         .then(resp => resp.json())
         .then(dogs => {
             for (const dog of dogs){
-                let d = new Dog(dog.id, dog.name, dog.breed, dog.owner, dog.address, dog.comment)
+                let d = new Dog(dog.id, dog.name, dog.breed, dog.owner, dog.address, dog.comment, dog.img)
             d.renderDog();
             }
             
@@ -26,6 +26,7 @@ function fetchDogsByNeighborhood(id){
     }
 
 function dogFormSubmission(){
+    debugger
     event.preventDefault();
     let neighborhood_id = event.target.neighborhood.value
     let name = event.target.name.value
@@ -33,6 +34,7 @@ function dogFormSubmission(){
     let owner = event.target.owner.value
     let address = event.target.address.value
     let comment = event.target.comment.value
+    let img = event.target.image.value
 
     let dog = {
         name: name,
@@ -40,6 +42,7 @@ function dogFormSubmission(){
         owner: owner,
         address: address,
         comment: comment,
+        img: img,
         neighborhood_id: neighborhood_id
     }
 
@@ -53,7 +56,7 @@ function dogFormSubmission(){
     })
     .then(resp => resp.json())
     .then(dog => {
-        let d = new Dog(dog.id, dog.name, dog.breed, dog.owner, dog.address, dog.comment, dog.neighborhood_id)
+        let d = new Dog(dog.id, dog.name, dog.breed, dog.owner, dog.address, dog.comment, dog.img, dog.neighborhood_id)
         d.renderDog()
     })
     event.target.reset
@@ -165,13 +168,14 @@ class Dog {
     // static all = []
     // static dogContainer = document.getElementById('dogs-container')
 
-    constructor(id, name, breed, owner, address, comment, neighborhood_id){
+    constructor(id, name, breed, owner, address, comment, img, neighborhood_id){
         this.id = id;
         this.name = name;
         this.breed = breed;
         this.owner = owner;
         this.address = address;
         this.comment = comment;
+        this.img = img;
         this.neighborhood_id = neighborhood_id;
         
         // this.element = document.createElement('li')
@@ -205,6 +209,7 @@ class Dog {
         DogDiv.innerHTML +=
         `
         <div data-id=${this.id} class=dog-card>
+        <img data-id=${this.img} class="dog-img" src="${this.img}" /><br>
         Name: <b>${this.name}</b> <br>
         Breed: ${this.breed} <br>
         Owner: ${this.owner} <br>
