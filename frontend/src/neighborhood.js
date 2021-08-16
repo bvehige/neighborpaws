@@ -3,6 +3,36 @@ const neighborhoodDiv = document.getElementById("neighborhood-container")
 const h1 = document.getElementById("h1-neighborhoods")
 const btmLink = document.getElementById("bottom-link")
 
+
+class Neighborhood {
+    constructor(id, name, city, state, zipcode){
+        this.id = id;
+        this.name = name;
+        this.city = city;
+        this.state = state;
+        this.zipcode = zipcode;
+    }
+
+// //render neighborhood instance method
+    renderNeighborhood() {
+        dogForm.style.display = "none"
+        dogNeighborhoodh1.style.display = "none"
+        neighborhoodDiv.innerHTML +=
+        `
+        <div data-id=${this.id} class=neighborhood-card>
+        <h3>${this.name} Neighborhood</h3> - ${this.city},  ${this.state} ${this.zipcode} <br><br>
+        <button data-id="${this.id}" onclick="viewNeighborhood()" class="view-neighborhood">View Neighborhood</button><br><br>
+        <button id = "delete button" data-id="${this.id}"> Delete Neighborhood</button>
+        </div>
+        `
+        const bttns = document.querySelectorAll('button')
+        for (const bttn of bttns){
+            bttn.addEventListener('click', deleteButton)
+        }
+    }
+}
+
+
 // read - fetch neighborhood index
 function fetchNeighborhoods(){
     fetch(`${BASE_URL}/neighborhoods`)
@@ -12,7 +42,6 @@ function fetchNeighborhoods(){
             let n =  new Neighborhood(neighborhood.id, neighborhood.name, neighborhood.city, neighborhood.state, neighborhood.zipcode)
             n.renderNeighborhood();
         }
-
     })
 }
 
@@ -29,7 +58,6 @@ function fetchNeighborhood(id){
 
 // create - create a new neighborhood
 function createNeighborhood(){
-
     neighborhoodForm.innerHTML += 
     `
     <b>Create a new Neighborhood</b><br><br>
@@ -46,8 +74,6 @@ function createNeighborhood(){
     </form>
     `
     neighborhoodForm.addEventListener("submit", neighborhoodFormSubmission)
-
-
 } 
 
 function neighborhoodFormSubmission(){
@@ -81,12 +107,9 @@ function neighborhoodFormSubmission(){
     }
 
 
-
-    function viewNeighborhood(){
-        
+    function viewNeighborhood(){        
         const id = event.target.dataset.id
         
-
         fetch(`${BASE_URL}/neighborhoods/${id}`)
         .then(resp => resp.json())
         .then(neighborhood => {
@@ -132,15 +155,7 @@ function neighborhoodFormSubmission(){
         btmLink.innerHTML = `
         <a id="back-button" href="#">Back to All Neighborhoods</a>
         `
-        
     }
-
-
-    // function fetchNeighborhoodDogs(){
-    //     fetch(`${BASE_URL}/neighborhoods/${id}/dogs`)
-    //     .then(resp => resp.json())
-    //     .then(dogs => Dog)
-    // }
 
     function goBack(){
         neighborhoodForm.style.display = "block"
@@ -165,50 +180,6 @@ function neighborhoodFormSubmission(){
             method: 'DELETE'
         })
         .then(resp => resp.json())
-        .then(data => alert(data.message))
-        // fetchNeighborhoods()
-        
+        .then(data => alert(data.message))        
     }
 
-class Neighborhood {
-    constructor(id, name, city, state, zipcode){
-        this.id = id;
-        this.name = name;
-        this.city = city;
-        this.state = state;
-        this.zipcode = zipcode;
-    }
-
-// //render neighborhood instance method
-    renderNeighborhood() {
-        dogForm.style.display = "none"
-        dogNeighborhoodh1.style.display = "none"
-        neighborhoodDiv.innerHTML +=
-        `
-        <div data-id=${this.id} class=neighborhood-card>
-        <h3>${this.name} Neighborhood</h3> - ${this.city},  ${this.state} ${this.zipcode} <br><br>
-        <button data-id="${this.id}" onclick="viewNeighborhood()" class="view-neighborhood">View Neighborhood</button><br><br>
-        <button id = "delete button" data-id="${this.id}"> Delete Neighborhood</button>
-        </div>
-        `
-        // const buttons = document.getElementsByName("button")
-        // for (const button of buttons){
-        //     button.addEventListener('click', neighborhoodShow)
-        // }
-        const bttns = document.querySelectorAll('button')
-        for (const bttn of bttns){
-            bttn.addEventListener('click', deleteButton)
-        }
-
-    }
-
-   
-
-    // <button data-id="${this.id}" class="add-dog-btn">Add A Dog</button>
-
-    // viewNeighborhood() {
-    //     // event.preventDefault();
-    //     debugger
-    //     console.log("view neighborhood")
-    // }
-}
