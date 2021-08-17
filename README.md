@@ -1,6 +1,6 @@
 # neighborpaws
 
-NeighborPaws has a JavaScript frontend and Rails API backend. The app is used to create digital Neighborhoods for dogs where neighbors can add their dog to a neighborhood to help be known and identified.  This could be helpful just to get to know your neighbor's dogs homes, their temperments, and to aid in finding their home if they get lost.
+NeighborPaws has a JavaScript frontend and Rails API backend. The app is used to create digital Neighborhoods for dogs where owners can add their dog to a neighborhood directory to help be known and identified to their neighbors.  This could be helpful just to get to dogs in your neighborhood, identify where neighbor dogs live, know their temperments, and to aid in finding their home if they get lost.  
 
 Instructions
 1. Go to the Backend Rails API repo and follow Installation instructions
